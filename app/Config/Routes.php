@@ -31,6 +31,20 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->group('home', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('/', 'Home::index');
+    $routes->get('pesawat', 'Home::pesawat');
+    $routes->get('kereta', 'Home::kereta');
+    $routes->get('detail/(:num)', 'Home::detail/$1');
+});
+$routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('login', 'Auth::login');
+    $routes->get('register', 'Auth::register');
+    $routes->post('processRegister', 'Auth::processRegister');
+    $routes->post('login', 'Auth::login');
+    $routes->get('detail/(:num)', 'Home::detail/$1');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
